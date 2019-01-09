@@ -9,13 +9,15 @@ namespace Hook_Keyboard
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-        public static bool GameWasSelected = false;
+        public static bool GameWasSelected = true;
 
         public static int KeyboardHook(IntPtr @params)
         {
             IntPtr unloadKeyboardPtr = new IntPtr(0x47C2B0);
             IntPtr loadKeyboardPtr = new IntPtr(0x47BE60);
             IntPtr gameFocusedPtr = new IntPtr(0x5678F0);
+            //IntPtr keyboardAquiredPtr = new IntPtr(0x4FC8B8);
+            
             IntPtr windowHandle = Process.GetCurrentProcess().MainWindowHandle;
 
             IntPtr selectedWindow = GetForegroundWindow();
@@ -26,19 +28,36 @@ namespace Hook_Keyboard
                 if (!GameWasSelected)
                 {
                     GameWasSelected = true;
+                    if (ConfigFile.FreezeGameAltTab)
+                    {
+                        Marshal.WriteByte(gameFocusedPtr, 0x1);
+                    }
                     Invoker.InvokeCallback(unloadKeyboardPtr);
                     Invoker.InvokeCallback(loadKeyboardPtr);
-                    Marshal.WriteByte(gameFocusedPtr, 0x1);
                 }
             }
             else
             {
                 GameWasSelected = false;
-                Marshal.WriteByte(gameFocusedPtr, 0x0);
+                if (ConfigFile.FreezeGameAltTab)
+                {
+                    Marshal.WriteByte(gameFocusedPtr, 0x0);
+                }
             }
 
             return 0;
         }
+
+        //public static int MessageHook(IntPtr @params)
+        //{
+        //    //IntPtr gameFocusedPtr = new IntPtr(0x5678F0);
+        //    //Marshal.WriteByte(gameFocusedPtr, 0x1);
+            
+
+        //    //IntPtr windowHandle = Process.GetCurrentProcess().MainWindowHandle;
+        //    //MessageBoxA(windowHandle, "Direct Input Keyboard Acquire FAILED", "ERROR", 0x0);
+        //    //return 0;
+        //}
     }
 
     static class TIEKeyboard
@@ -47,7 +66,7 @@ namespace Hook_Keyboard
         private static extern IntPtr GetForegroundWindow();
 
 
-        public static bool GameWasSelected = false;
+        public static bool GameWasSelected = true;
 
         public static int KeyboardHook(IntPtr @params)
         {
@@ -66,15 +85,21 @@ namespace Hook_Keyboard
                 if (!GameWasSelected)
                 {
                     GameWasSelected = true;
+                    if (ConfigFile.FreezeGameAltTab)
+                    {
+                        Marshal.WriteByte(gameFocusedPtr, 0x1);
+                    }
                     Invoker.InvokeCallback(unloadKeyboardPtr);
                     Invoker.InvokeCallback(loadKeyboardPtr);
-                    Marshal.WriteByte(gameFocusedPtr, 0x1);
                 }
             }
             else
             {
                 GameWasSelected = false;
-                Marshal.WriteByte(gameFocusedPtr, 0x0);
+                if (ConfigFile.FreezeGameAltTab)
+                {
+                    Marshal.WriteByte(gameFocusedPtr, 0x0);
+                }
             }
 
             return 0;
@@ -85,7 +110,7 @@ namespace Hook_Keyboard
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-        public static bool GameWasSelected = false;
+        public static bool GameWasSelected = true;
 
         public static int KeyboardHook(IntPtr @params)
         {

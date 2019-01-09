@@ -10,7 +10,8 @@ namespace Hook_Keyboard
     {
         private static HookFunction[] hookFunctions = new HookFunction[]
         {
-            new HookFunction(0x4AC3AD, XWKeyboard.KeyboardHook)
+            new HookFunction(0x4AC3AD, XWKeyboard.KeyboardHook),
+            //new HookFunction(0x47BFDC, XWKeyboard.MessageHook)
         };
 
         public static HookFunctionPtr[] hookFunctionsPtr = Array.ConvertAll(hookFunctions, t => t.Struct);
@@ -18,6 +19,9 @@ namespace Hook_Keyboard
         private static HookPatchItem[] keyboardPatch = new HookPatchItem[]
         {
             new HookPatchItem(0xAB7A8, "FF1574314C008B0DF8785600", "E873C70F0090EB1490909090"),
+            //new HookPatchItem(0x7B3D7, "6A0068EC9C4D00", "E844CB1200EB0D"),
+
+            new HookPatchItem(0x7B3D5, "741A", "EB1A"),
         };
 
         public static HookPatchItemPtr[] keyboardPatchPtr = Array.ConvertAll(keyboardPatch, t => t.Struct);
@@ -42,6 +46,7 @@ namespace Hook_Keyboard
         private static HookPatchItem[] keyboardPatch = new HookPatchItem[]
         {
             new HookPatchItem(0x99518, "FF15D0C14D003B056CCA5800", "E8935E0700EB269090909090"),
+            new HookPatchItem(0x164C5, "741A", "EB1A"),
         };
 
         public static HookPatchItemPtr[] keyboardPatchPtr = Array.ConvertAll(keyboardPatch, t => t.Struct);
