@@ -82,4 +82,28 @@ namespace Hook_Keyboard
 
         public static HookPatchPtr[] patchesPtr = Array.ConvertAll(patches, t => t.Struct);
     }
+
+    static class XWAHooks
+    {
+        private static HookFunction[] hookFunctions = new HookFunction[]
+        {
+            new HookFunction(0x50B5C9, XWAKeyboard.KeyboardHook)
+        };
+
+        public static HookFunctionPtr[] hookFunctionsPtr = Array.ConvertAll(hookFunctions, t => t.Struct);
+
+        private static HookPatchItem[] keyboardPatch = new HookPatchItem[]
+        {
+            new HookPatchItem(0x10A9C4, "FF1588925A008B0D38AD9100", "E857D50900EB269090909090"),
+        };
+
+        public static HookPatchItemPtr[] keyboardPatchPtr = Array.ConvertAll(keyboardPatch, t => t.Struct);
+
+        private static HookPatch[] patches = new HookPatch[]
+        {
+            new HookPatch("X-Wing Alliance Keyboard Reaquire Hook", keyboardPatchPtr),
+        };
+
+        public static HookPatchPtr[] patchesPtr = Array.ConvertAll(patches, t => t.Struct);
+    }
 }

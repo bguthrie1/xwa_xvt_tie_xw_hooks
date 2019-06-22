@@ -25,6 +25,10 @@ namespace Hook_Keyboard
             {
                 return BOPHooks.hookFunctionsPtr.Length;
             }
+            else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return XWAHooks.hookFunctionsPtr.Length;
+            }
             else
             {
                 return 0;
@@ -56,6 +60,13 @@ namespace Hook_Keyboard
                     return BOPHooks.hookFunctionsPtr[index];
                 }
             }
+            else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
+            {
+                if (index >= 0 && index < XWAHooks.hookFunctionsPtr.Length)
+                {
+                    return XWAHooks.hookFunctionsPtr[index];
+                }
+            }
 
 
             return new HookFunctionPtr();
@@ -82,10 +93,10 @@ namespace Hook_Keyboard
             {
                 return BOPHooks.patchesPtr.Length;
             }
-            //else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    return XWAHooks.patchesPtr.Length;
-            //}
+            else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return XWAHooks.patchesPtr.Length;
+            }
             else
             {
                 return 0;
@@ -130,14 +141,14 @@ namespace Hook_Keyboard
                 }
                 return Marshal.UnsafeAddrOfPinnedArrayElement(BOPHooks.patchesPtr, index);
             }
-            //else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    if (index < 0 || index >= XWAHooks.patchesPtr.Length)
-            //    {
-            //        return IntPtr.Zero;
-            //    }
-            //    return Marshal.UnsafeAddrOfPinnedArrayElement(XWAHooks.patchesPtr, index);
-            //}
+            else if (string.Equals(processName, "xwingalliance", StringComparison.CurrentCultureIgnoreCase))
+            {
+                if (index < 0 || index >= XWAHooks.patchesPtr.Length)
+                {
+                    return IntPtr.Zero;
+                }
+                return Marshal.UnsafeAddrOfPinnedArrayElement(XWAHooks.patchesPtr, index);
+            }
             else
             {
                 if (index < 0 || index >= XWHooks.patchesPtr.Length)

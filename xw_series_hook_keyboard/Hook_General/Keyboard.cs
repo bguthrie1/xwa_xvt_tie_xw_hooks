@@ -139,4 +139,39 @@ namespace Hook_Keyboard
             return 0;
         }
     }
+
+    static class XWAKeyboard
+    {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        public static bool GameWasSelected = true;
+
+        public static int KeyboardHook(IntPtr @params)
+        {
+            IntPtr unloadKeyboardPtr = new IntPtr(0x42B4A0);
+            IntPtr loadKeyboardPtr = new IntPtr(0x42AF80);
+            IntPtr windowHandle = Process.GetCurrentProcess().MainWindowHandle;
+
+
+            IntPtr selectedWindow = GetForegroundWindow();
+
+
+            if (selectedWindow == windowHandle)
+            {
+                if (!GameWasSelected)
+                {
+                    GameWasSelected = true;
+                    Invoker.InvokeCallback(unloadKeyboardPtr);
+                    Invoker.InvokeCallback(loadKeyboardPtr);
+                }
+            }
+            else
+            {
+                GameWasSelected = false;
+            }
+
+            return 0;
+        }
+    }
 }

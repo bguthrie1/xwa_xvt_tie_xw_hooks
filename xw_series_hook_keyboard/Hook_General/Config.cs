@@ -19,7 +19,7 @@ namespace Hook_Keyboard
                     sw.WriteLine("");
                     sw.WriteLine("; FreezeGameAltTab = 0 (no) or 1 (yes)");
                     sw.WriteLine("; When set to 0, game will continue running in the background and take keyboard input.");
-                    sw.WriteLine("; When set to 1, game will be frozen and not take any keyboard input (Does not apply to Balance of Power).");
+                    sw.WriteLine("; When set to 1, game will be frozen and not take any keyboard input (Does not apply to X-Wing vs TIE Fighter or X-Wing Alliance).");
                     sw.WriteLine("FreezeGameAltTab = 1");
                 }
             }
