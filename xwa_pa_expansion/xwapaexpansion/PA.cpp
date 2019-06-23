@@ -3,6 +3,23 @@
 #include "XWAFramework.h"
 #include <cstring>
 #include <cstdlib>
+#include "config.h"
+
+int ConfigGetNumberOfExtraPAS()
+{
+	vector<string> lines = GetFileLines("hook_pa_expansion.cfg");
+
+	if (lines.size())
+	{
+		return GetFileKeyValueInt(lines, "NumberOfExtraPAs");
+	}
+	else
+	{
+		return 0;
+	}
+
+	return 0;
+}
 
 int PAHook(int* params)
 {
@@ -10,11 +27,12 @@ int PAHook(int* params)
 	int randNum2;
 	int randNum3;
 	int randNum4;
+	int randNum5;
 	int randModified;
 	__int8 briefingLogo;
 	QuickMissionData* QuickMissionDataPtr = *(QuickMissionData**)0x9EB8E0;
 
-	switch (randXWA() % 24)
+	switch (randXWA() % (24 + ConfigGetNumberOfExtraPAS()))
 	{
 	case 0:
 	case 1:
@@ -27,7 +45,7 @@ int PAHook(int* params)
 	case 7:
 	case 8:
 		randNum1 = randXWA();
-		sprintf(*mainStringBuffer, "wave\\frontend\\T01PA1%d.wav", randNum1 % 3 + 1);
+		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA1%d.wav", randNum1 % 3 + 1);
 		break;
 	case 9:
 	case 10:
@@ -47,7 +65,7 @@ int PAHook(int* params)
 		{
 		Copy_Announcement_1Through9:
 			randNum2 = randXWA();
-			sprintf(*mainStringBuffer, "wave\\frontend\\T01PA0%d.wav", randNum2 % 6 + 3);
+			sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA0%d.wav", randNum2 % 6 + 3);
 		}
 		break;
 	case 11:
@@ -69,11 +87,44 @@ int PAHook(int* params)
 		randModified = ((randNum4 >> 31) ^ abs(randNum4) & 7) - (randNum4 >> 31) + 28;
 	Copy_Almost_Any_Announcement:
 		// Copy almost any announcement to the string buffer.
-		sprintf(*mainStringBuffer, "wave\\frontend\\T01PA%d.wav", randModified);
+		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA%d.wav", randModified);
 		break;
 	case 23:
-		sprintf(*mainStringBuffer, "wave\\frontend\\T01PA37.wav");
+		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA37.wav");
 		break;
+	case 24:
+	case 25:
+	case 26:
+	case 27:
+	case 28:
+	case 29:
+	case 30:
+	case 31:
+	case 32:
+	case 33:
+	case 34:
+	case 35:
+	case 36:
+	case 37:
+	case 38:
+	case 39:
+	case 40:
+	case 41:
+	case 42:
+	case 43:
+	case 44:
+	case 45:
+	case 46:
+	case 47:
+	case 48:
+	case 49:
+	case 50:
+	case 51:
+	case 52:
+	case 53:
+		randNum5 = randXWA();
+		randModified = ((randNum5 >> 31) ^ abs(randNum5) & ConfigGetNumberOfExtraPAS() - 1) - (randNum5 >> 31) + 38;
+		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA%d.wav", randModified);
 	default:
 		*(*mainStringBuffer) = 0;
 		break;

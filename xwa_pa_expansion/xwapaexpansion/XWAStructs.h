@@ -2105,6 +2105,8 @@ struct MissionGlobalCargo
 	BYTE unknown_0x4C[64];
 };
 
+static_assert(sizeof(MissionGlobalCargo) == 140, "size of MissionGlobalCargo must be 140");
+
 struct MissionMessage
 {
 	char Message[64];
@@ -2134,8 +2136,10 @@ struct MissionMessage
 	BYTE Cancel1OrCancel2;
 	BYTE unknown_0x9F;
 	BYTE Unknown3;
-	BYTE unknown_0xA1;
+	BYTE unknown_0xA1[13];
 };
+
+static_assert(sizeof(MissionMessage) == 160, "size of MissionMessage must be 160");
 
 struct MissionGlobalGoal
 {
@@ -2159,8 +2163,10 @@ struct MissionGlobalGoal
 	BYTE Unknown6;
 	BYTE unknown_0x37;
 	BYTE ActiveSquence;
-	BYTE unknown_0x39[65];
+	BYTE unknown_0x39[73];
 };
+
+static_assert(sizeof(MissionGlobalGoal) == 122, "size of MissionGlobalGoal must be 122");
 
 struct MissionTeam
 {
@@ -2174,7 +2180,7 @@ struct MissionTeam
 	BYTE unknown_0x1BE[41];
 };
 
-
+static_assert(sizeof(MissionTeam) == 485, "size of MissionTeam must be 485");
 
 struct QuickMissionHeader
 {
@@ -2345,7 +2351,10 @@ struct MissionFlightGroup
 	BYTE unknown_0xE36;
 	BYTE Unknown41;
 	BYTE unknown_0xE38[6];
+	BYTE unknown_0x[28];
 };
+
+static_assert(sizeof(MissionFlightGroup) == 3646, "size of MissionFlightGroup must be 3646");
 
 struct QuickMissionData
 {
@@ -2360,6 +2369,264 @@ struct QuickMissionData
 	__int16 platformID;
 	BYTE empty1[557568];
 };
+
+static_assert(sizeof(QuickMissionData) == 1290432, "size of QuickMissionData must be 1290432");
+
+struct T0x0AE2A60_1137E_0108
+{
+	int field_0[512];
+};
+
+struct T0x0AE2A60_1137E_4908
+{
+	int field_0[25];
+};
+
+struct T0x0AE2A60_1137E_4C8C
+{
+	int field_0[6];
+};
+
+struct S0x0AE2A60_05E8E
+{
+	int bonusScore;
+	char field_4[20];
+	int field_18;
+	char field_1C[8];
+	int field_24;
+	char field_28[8];
+	int field_30[1024];
+	char field_1030[2048];
+	int field_1830[1024];
+	char field_2830[2048];
+	int field_3030[1024];
+	char field_4030[2048];
+	int field_4830[50];
+	char field_48F8[100];
+	int field_495C[50];
+	char field_4A24[100];
+	int field_4A88[50];
+	char field_4B50[100];
+	int field_4BB4[12];
+	char field_4BE4[24];
+	int field_4BFC[12];
+	char field_4C2C[24];
+	int field_4C44[12];
+	char field_4C74[24];
+	int field_4C8C;
+	char field_4C90[8];
+	int field_4C98;
+	char field_4C9C[8];
+	int field_4CA4;
+	char field_4CA8[8];
+	int field_4CB0;
+	char field_4CB4[8];
+	int field_4CBC;
+	char field_4CC0[8];
+	int field_4CC8;
+	char field_4CCC[8];
+	int field_4CD4;
+	char field_4CD8[8];
+	int field_4CE0;
+	char field_4CE4[8];
+	int field_4CEC;
+	char field_4CF0[8];
+	int field_4CF8[50];
+	char field_4DC0[100];
+	int field_4E24[12];
+	char field_4E54[24];
+};
+
+struct S0x0AE2A60_0ACFE
+{
+	int numOfTimesFlown;
+	int field_4;
+	int field_8;
+	int field_C;
+	int field_10;
+	int field_14;
+	int bestScore;
+	int bestTime;
+	int field_20;
+	int awardID;
+	int bestBonus;
+	char field_2C[4];
+};
+
+struct PilotData_ClientPlayer
+{
+	char formalName[14];
+	char friendlyName[14];
+	int flightGroupID;
+	int field_20;
+	int directPlayID;
+	int field_28;
+	int field_2C;
+	int field_30;
+	int field_34;
+	int field_38;
+	int field_3C;
+	int field_40;
+	int field_44;
+	int SpeciesID;
+	int WarheadType;
+	int BeamType;
+	int CounterMeasureType;
+	int craftsCount;
+	int wavesCount;
+	int field_60;
+};
+
+struct S0x0AE2A60_11262
+{
+	int missionScore;
+	int field_4;
+	char isMissionComplete[4];
+	int field_C;
+	int field_10;
+	int field_14;
+	int field_18;
+};
+
+struct PilotFactionStatsEntry
+{
+	int field_0;
+	int Team;
+	int MissionDirectory;
+	int MissionDescriptionIDs[7];
+	char field_28[32];
+	int field_48;
+	int field_4C;
+	char field_50[16];
+	int field_60;
+	char field_64[24];
+	int field_7C;
+	char field_80[16];
+	int field_90;
+	char field_94[24];
+	int field_AC[4];
+	char field_BC[12];
+	int totalScore;
+	char field_CC[4];
+	int bonusScore;
+	int field_D4;
+	int field_D8[3];
+	int field_E4[3];
+	int totalKills[3];
+	int field_FC[3];
+	T0x0AE2A60_1137E_0108 field_108[3];
+	T0x0AE2A60_1137E_0108 field_1908[3];
+	T0x0AE2A60_1137E_0108 field_3108[3];
+	T0x0AE2A60_1137E_4908 field_4908[3];
+	T0x0AE2A60_1137E_4908 field_4A34[3];
+	T0x0AE2A60_1137E_4908 field_4B60[3];
+	T0x0AE2A60_1137E_4C8C field_4C8C[3];
+	T0x0AE2A60_1137E_4C8C field_4CD4[3];
+	T0x0AE2A60_1137E_4C8C field_4D1C[3];
+	int field_4D64[3];
+	int field_4D70[3];
+	int field_4D7C[3];
+	int field_4D88[3];
+	int field_4D94[3];
+	int totalCraftLosses[3];
+	int fromCollisions[3];
+	int toStarships[3];
+	int toMines[3];
+	T0x0AE2A60_1137E_4908 field_4DD0[3];
+	T0x0AE2A60_1137E_4C8C field_4EFC[3];
+};
+
+
+struct PilotData
+{
+	char name[14];
+	int field_E;
+	char field_12[8];
+	int field_1A;
+	int numHumanPlayersLastMission;
+	int field_22;
+	int Team;
+	int missionDirectoryID;
+	int missionDescriptionIDs[7];
+	char multiplayerGameName[32];
+	char multiplayerGameName2[32];
+	int field_8A;
+	int field_8E;
+	int field_92;
+	int newPromotion;
+	int nextPromotionPercent;
+	int field_9E[3];
+	int field_AA[3];
+	int field_B6[3];
+	int field_C2[3];
+	T0x0AE2A60_1137E_0108 field_CE[3];
+	T0x0AE2A60_1137E_0108 field_18CE[3];
+	T0x0AE2A60_1137E_0108 field_30CE[3];
+	T0x0AE2A60_1137E_4908 field_48CE[3];
+	T0x0AE2A60_1137E_4908 field_49FA[3];
+	T0x0AE2A60_1137E_4908 field_4B26[3];
+	T0x0AE2A60_1137E_4C8C field_4C52[3];
+	T0x0AE2A60_1137E_4C8C field_4C9A[3];
+	T0x0AE2A60_1137E_4C8C field_4CE2[3];
+	int field_4D2A[3];
+	int field_4D36[3];
+	int field_4D42[3];
+	int field_4D4E[3];
+	int field_4D5A[3];
+	int field_4D66[3];
+	int field_4D72[3];
+	int field_4D7E[3];
+	int field_4D8A[3];
+	T0x0AE2A60_1137E_4908 field_4D96[3];
+	T0x0AE2A60_1137E_4C8C field_4EC2[3];
+	int missionScore;
+	int field_4F0E[8];
+	int field_4F2E[8];
+	int field_4F4E[192];
+	int field_524E[192];
+	int field_554E[8];
+	int field_556E[8];
+	int field_558E[192];
+	int field_588E[192];
+	int field_5B8E[192];
+	S0x0AE2A60_05E8E field_5E8E;
+	char field_ACFA[4];
+	S0x0AE2A60_0ACFE MissionStatistics[53];
+	char field_B6EE[9696];
+	S0x0AE2A60_0ACFE MissionStatistics2[53];
+	char field_E6BE[624];
+	int field_E92E;
+	char field_E932[9064];
+	char speciesKnown[232];
+	char field_10D82[280];
+	int newCraftAddedToTechRoom;
+	int pilotRating;
+	int rank;
+	int kalidorCresent;
+	int field_10EAA;
+	int field_10EAE[25];
+	char ratingName[32];
+	int field_10F32;
+	int field_10F36;
+	int field_10F3A;
+	int field_10F3E;
+	PilotData_ClientPlayer field_10F42[8];
+	S0x0AE2A60_11262 field_11262[10];
+	int field_1137A;
+	PilotFactionStatsEntry FactionStats[4];
+	char emailsStatus[100];
+	char emailsSortCriterion;
+	int campaignMode;
+	int skipMissionsRemaining;
+	int regionsCount;
+	char MissionFileName[256];
+	char field_251FF;
+	char field_25200[7];
+	int field_25207;
+	char hangarType;
+};
+
+static_assert(sizeof(PilotData) == 152076, "size of PilotData must be 152076");
 
 #pragma pack(pop)
 
