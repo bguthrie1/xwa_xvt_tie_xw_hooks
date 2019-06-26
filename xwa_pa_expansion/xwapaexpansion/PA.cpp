@@ -125,6 +125,7 @@ int PAHook(int* params)
 		randNum5 = randXWA();
 		randModified = ((randNum5 >> 31) ^ abs(randNum5) & ConfigGetNumberOfExtraPAS() - 1) - (randNum5 >> 31) + 38;
 		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA%d.wav", randModified);
+		break;
 	default:
 		*(*mainStringBuffer) = 0;
 		break;
