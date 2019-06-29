@@ -7,9 +7,6 @@
     <ClCompile Include="PA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hook_function.h">
@@ -36,9 +33,7 @@
     <ClInclude Include="XWATypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -47,5 +42,8 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{b7c58e1f-2de3-4fc0-85e4-aa8ab9f134e4}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Hook_PA_Expansion.rc" />
   </ItemGroup>
 </Project>

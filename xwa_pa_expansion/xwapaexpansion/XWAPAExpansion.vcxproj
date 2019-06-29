@@ -134,20 +134,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="config.cpp" />
     <ClCompile Include="hookmain.cpp" />
     <ClCompile Include="PA.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h" />
     <ClInclude Include="hooks.h" />
     <ClInclude Include="hook_function.h" />
     <ClInclude Include="PA.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="XWAEnums.h" />
     <ClInclude Include="XWAFramework.h" />
     <ClInclude Include="XWAStructs.h" />
     <ClInclude Include="XWATypes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Hook_PA_Expansion.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

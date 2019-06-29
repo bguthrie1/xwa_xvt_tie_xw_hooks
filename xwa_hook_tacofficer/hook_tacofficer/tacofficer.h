@@ -5,7 +5,7 @@ int TacticalOfficerHook(int* params);
 const auto provingGrounds = (__int8*)0x8053E5;
 const auto configTacticalOfficerMessages = (__int8*)0xB0C884;
 const auto tacOfficerInMission = (__int8*)0x7B6FAE;
-const auto LoadSoundLstFile = (int(*)(char*, int, const char*))0x43A150;
+const auto LoadSoundLstFile = (int(*)(char* lstFileName, int sourceMasterStringIndex, const char* wavePath))0x43A150;
 
 enum TacticalOfficer : __int8
 {

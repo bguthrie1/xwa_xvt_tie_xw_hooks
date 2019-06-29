@@ -3,22 +3,39 @@
 #include "XWAFramework.h"
 #include <cstring>
 #include <cstdlib>
-#include "config.h"
+#include <filesystem>
 
-int ConfigGetNumberOfExtraPAS()
+using namespace std;
+
+string StringToUpper(string strToConvert)
 {
-	vector<string> lines = GetFileLines("hook_pa_expansion.cfg");
+	std::transform(strToConvert.begin(), strToConvert.end(), strToConvert.begin(), ::toupper);
 
-	if (lines.size())
+	return strToConvert;
+}
+
+int GetNumOfExtraPA()
+{
+	int PACount = 0;
+
+	for (const auto& file : std::experimental::filesystem::directory_iterator(".\\Wave\\Frontend"))
 	{
-		return GetFileKeyValueInt(lines, "NumberOfExtraPAs");
-	}
-	else
-	{
-		return 0;
+		if (StringToUpper(file.path().extension().string()) != ".WAV")
+		{
+			continue;
+		}
+
+		const auto& filename = file.path().filename().string();
+
+		if (filename.find("T01PA") != 0 && filename.find("t01pa") != 0)
+		{
+			continue;
+		}
+
+		++PACount;
 	}
 
-	return 0;
+	return PACount - 37;
 }
 
 int PAHook(int* params)
@@ -31,8 +48,15 @@ int PAHook(int* params)
 	int randModified;
 	__int8 briefingLogo;
 	QuickMissionData* QuickMissionDataPtr = *(QuickMissionData**)0x9EB8E0;
+	int PACount = GetNumOfExtraPA();
+	int newRandChance = 0;
 
-	switch (randXWA() % (24 + ConfigGetNumberOfExtraPAS()))
+	if (PACount > 0)
+	{
+		newRandChance = 30;
+	}
+
+	switch (randXWA() % (24 + newRandChance))
 	{
 	case 0:
 	case 1:
@@ -123,7 +147,7 @@ int PAHook(int* params)
 	case 52:
 	case 53:
 		randNum5 = randXWA();
-		randModified = ((randNum5 >> 31) ^ abs(randNum5) & ConfigGetNumberOfExtraPAS() - 1) - (randNum5 >> 31) + 38;
+		randModified = ((randNum5 >> 31) ^ abs(randNum5) & PACount - 1) - (randNum5 >> 31) + 38;
 		sprintf_(*mainStringBuffer, "wave\\frontend\\T01PA%d.wav", randModified);
 		break;
 	default:
