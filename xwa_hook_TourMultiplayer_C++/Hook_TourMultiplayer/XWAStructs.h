@@ -2443,7 +2443,7 @@ struct S0x0AE2A60_0ACFE
 	int field_4;
 	int field_8;
 	int field_C;
-	int field_10;
+	int isCompleted;
 	int field_14;
 	int bestScore;
 	int bestTime;
@@ -2547,7 +2547,7 @@ struct PilotData
 	  int field_22;
 	  int Team;
 	  int missionDirectoryID;
-	  int missionDescriptionIDs[7];
+	  int missionIDs[7];
 	char multiplayerGameName[32];
 	char multiplayerGameName2[32];
 	  int field_8A;
@@ -2627,6 +2627,17 @@ struct PilotData
 };
 
 static_assert(sizeof(PilotData) == 152076, "size of PilotData must be 152076");
+
+
+struct MissionLSTEntry
+{
+	char missionFileName[64];
+	char missionTitle[128];
+	char MissionTitle[128];
+	__int32 IDNumber;
+	__int32 IsUnselectable;
+};
+
 
 #pragma pack(pop)
 

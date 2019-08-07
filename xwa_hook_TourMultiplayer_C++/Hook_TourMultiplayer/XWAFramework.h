@@ -13,6 +13,7 @@ CraftDefinition* CraftDefinitionPtr = (CraftDefinition*)0x5BB480;
 PilotData* PilotDataFrontEndPtr = (PilotData*)0xAE2A60;
 //QuickMissionData* QuickMissionDataPtr = *(QuickMissionData**)0x9EB8E0; // Set this at runtime
 
+
 // Frontend Functions
 const auto CopyRectToFrom = (LONG(*)(RECT *pRectDest, RECT *pRectSrc))0x558CB0;
 const auto CreateButtonWithHighlightAndSnd = (int(*)(RECT *rect, char *highlightedImage, char *imageStr, char *hoverText, int highlightColor, int color, int offset, char *soundStr))0x5563C0;
@@ -110,7 +111,7 @@ const auto missionDescriptionPtr = *(char **)0x9F4BD0;
 const auto missionLstPtr = (int *)0x9F4B98;
 const auto missionIndexLoaded = (int *)0x9F5E74;
 const auto missionSelectedOnLoadScrn = (int *)0x7830C0;
-const auto totalMissionsInLst = (int *)0x9F5EC0;
+const auto missionCountInLst = (int *)0x9F5EC0;
 const auto missionDirectoryMissionSelected = (int *)0xAE2A8E;
 const auto missionDescriptionScrollPosition = (int *)0x7831B0;
 RECT* rectStandard3 = (RECT *)0x6031A8;
@@ -192,6 +193,7 @@ const auto thisPlayerObjectIndex = (int*)0x634370;
 const auto configUpdateRate = (__int8*)0xB0C876;
 const auto latestNonInstantiatedRegion = (int*)0x80DB60;
 const auto ticksPerFrame = (int*)0x8C1640;
+const auto missionScrollPosition = (int*)0x7830E8;
 
 // Unknown Globals
 

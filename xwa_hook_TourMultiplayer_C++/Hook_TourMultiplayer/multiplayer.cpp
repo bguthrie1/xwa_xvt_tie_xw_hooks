@@ -185,8 +185,39 @@ int PanelButtonsHook(int* params)
 				*battleSelectScrollMovement = 0;
 				*battleSelectScrollReturnMovement = 0;
 				*missionSelectedOnLoadScrn = 0;
-				*loadScrnTotalMissionsListed = *totalMissionsInLst;
+				*loadScrnTotalMissionsListed = *missionCountInLst;
 				
+				signed int missionsListed = *missionCountInLst;
+				int missionIndex = 0;
+				char missionTitleBuffer[128];
+				memset(&missionTitleBuffer, 0, 128);
+				int missionIndexSelected = 0;
+				MissionLSTEntry* missionLst = *(MissionLSTEntry**)0x9F4B98;
+				char missionTitle[128];
+
+
+				if (*missionCountInLst > 0)
+				{
+					do
+					{
+						if (missionLst[missionIndex].IsUnselectable)
+						{
+							*loadScrnTotalMissionsListed = --missionsListed;
+						}
+						else
+						{
+							*(char**)missionTitle = missionLst[missionIndex].MissionTitle;
+							if (strcmp(missionLst[missionIndex].MissionTitle, missionTitleBuffer))
+							{
+								*loadScrnTotalMissionsListed = ++missionsListed;
+								strcpy_s(missionTitleBuffer, missionTitle);
+							}
+						}
+						missionIndexSelected = ++missionIndex;
+					} 
+					while (missionIndex < *missionCountInLst);
+				}
+
 
 				if (*rightPanelState2 != 3)
 				{
@@ -703,7 +734,7 @@ int LoadCancelDeleteButtonHook(int* params)
 				int missionCount = 0;
 				*missionIndexLoaded = 0;
 
-				if (*totalMissionsInLst > 0)
+				if (*missionCountInLst > 0)
 				{
 					int missionFromMissionDirectory = missionDirectoryMissionSelected[*missionDirectory];
 					do
@@ -711,7 +742,7 @@ int LoadCancelDeleteButtonHook(int* params)
 						if (missionLst[82 * missionCount + 80] == missionFromMissionDirectory)
 							break;
 						*missionIndexLoaded = ++missionCount;
-					} while (missionCount < *totalMissionsInLst);
+					} while (missionCount < *missionCountInLst);
 				}
 				LoadMissionsFromLstFile();
 				SetNumOfPlayerSlotsPerTeam();
@@ -732,7 +763,7 @@ int LoadCancelDeleteButtonHook(int* params)
 					int missionCount = 0;
 					*missionIndexLoaded = 0;
 
-					if (*totalMissionsInLst > 0)
+					if (*missionCountInLst > 0)
 					{
 						int missionFromMissionDirectory = missionDirectoryMissionSelected[*missionDirectory];
 						do
@@ -740,7 +771,7 @@ int LoadCancelDeleteButtonHook(int* params)
 							if (missionLst[82 * missionCount + 80] == missionFromMissionDirectory)
 								break;
 							*missionIndexLoaded = ++missionCount;
-						} while (missionCount < *totalMissionsInLst);
+						} while (missionCount < *missionCountInLst);
 					}
 
 					LoadMissionsFromLstFile();
