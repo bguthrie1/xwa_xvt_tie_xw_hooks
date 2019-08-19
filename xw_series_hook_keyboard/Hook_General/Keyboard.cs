@@ -48,6 +48,35 @@ namespace Hook_Keyboard
             return 0;
         }
 
+        public static int ConcourseKeyboardHook(IntPtr @params)
+        {
+            IntPtr unloadKeyboardPtr = new IntPtr(0x47C2B0);
+            IntPtr loadKeyboardPtr = new IntPtr(0x47BE60);
+            IntPtr appActivePtr = new IntPtr(0x566880);
+
+            IntPtr windowHandle = Process.GetCurrentProcess().MainWindowHandle;
+
+            IntPtr selectedWindow = GetForegroundWindow();
+
+            if (selectedWindow == windowHandle)
+            {
+                if (!GameWasSelected)
+                {
+                    GameWasSelected = true;
+                    Invoker.InvokeCallback(unloadKeyboardPtr);
+                    Invoker.InvokeCallback(loadKeyboardPtr);
+                }
+            }
+            else
+            {
+                GameWasSelected = false;
+            }
+
+            Marshal.WriteByte(appActivePtr, 0x1);
+
+            return 0;
+        }
+
         //public static int MessageHook(IntPtr @params)
         //{
         //    //IntPtr gameFocusedPtr = new IntPtr(0x5678F0);
@@ -101,6 +130,37 @@ namespace Hook_Keyboard
                     Marshal.WriteByte(gameFocusedPtr, 0x0);
                 }
             }
+
+            return 0;
+        }
+
+        public static int ConcourseKeyboardHook(IntPtr @params)
+        {
+            IntPtr unloadKeyboardPtr = new IntPtr(0x4173C0);
+            IntPtr loadKeyboardPtr = new IntPtr(0x416F50);
+            IntPtr appActivePtr = new IntPtr(0x58ABA4);
+
+
+            IntPtr windowHandle = Process.GetCurrentProcess().MainWindowHandle;
+
+            IntPtr selectedWindow = GetForegroundWindow();
+
+
+            if (selectedWindow == windowHandle)
+            {
+                if (!GameWasSelected)
+                {
+                    GameWasSelected = true;
+                    Invoker.InvokeCallback(unloadKeyboardPtr);
+                    Invoker.InvokeCallback(loadKeyboardPtr);
+                }
+            }
+            else
+            {
+                GameWasSelected = false;
+            }
+
+            Marshal.WriteByte(appActivePtr, 0x1);
 
             return 0;
         }
