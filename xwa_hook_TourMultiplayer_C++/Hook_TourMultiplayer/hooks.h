@@ -230,9 +230,6 @@ static const HookPatchItem g_multiPatch[] =
 
 	// Removes S-foils from Skipray Blastboat
 	{ 0xC50, "03", "05" },
-
-	// Fixes bug with wingmen menu and multiple waves
-	{ 0xC37F4, "7449", "EB49" },
 };
 
 static const HookPatch g_patches[] =
